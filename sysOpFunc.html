@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>funzioni.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="sistemi-operativi-riepilogo-delle-funzioni">Sistemi Operativi: Riepilogo delle funzioni</h1>
+<p>by Giovanni</p>
+<h2 id="file">File</h2>
+<h3 id="apertura-e-chiusura-file">Apertura e chiusura file</h3>
+<ul>
+<li><code>fopen(path, modo)</code></li>
+<li><code>fclose(file)</code></li>
+</ul>
+<h3 id="lettura-su-file">Lettura su file</h3>
+<ul>
+<li><code>fgetc(file)</code>: legge un carattere e lo fornisce come valore di ritorno</li>
+<li><code>fgets(buffer, N, file)</code>: legge una stringa di massimo <code>N</code> caratteri.</li>
+</ul>
+<h3 id="scrittura-su-file">Scrittura su file</h3>
+<ul>
+<li><code>fputc(carattere, file)</code>: scrive un carattere su file</li>
+<li><code>fputs(stringa, file)</code>: scrive una stringa su file</li>
+</ul>
+<h3 id="scrittura-e-lettura-di-pi%C3%B9-caratterinumeri-interi-e-reali">Scrittura e lettura di più caratteri/numeri interi e reali</h3>
+<p><code>fprintf(file, formato, argomenti)</code>
+<code>fscanf(fp, &quot;%s&quot;, buffer)</code></p>
+<h3 id="stampa-di-errori">Stampa di errori</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">perror</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *s)</span></span>;
+</div></code></pre>
+<p>Stampa il messaggio di errore relativo al valore corrente di <code>errno</code>, premettendo la stringa <code>s</code>.</p>
+<p>NOTA: <code>errno</code> è una variabile globale.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">char</span> *<span class="hljs-title">strerror</span><span class="hljs-params">(<span class="hljs-keyword">int</span> errnum)</span></span>;
+</div></code></pre>
+<p>Ritorna una stringa che spiega l'errore dal codice <code>errnum</code></p>
+<p>E' possibile spostare manualmente il cursore con la funzione</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fseek</span><span class="hljs-params">(FILE *fp, <span class="hljs-keyword">long</span> distanza, <span class="hljs-keyword">int</span> partenza)</span>
+</span></div></code></pre>
+<h3 id="cursore">Cursore</h3>
+<p>Dove:</p>
+<ul>
+<li><code>FILE *fp</code>: è il puntatore a file sul quale agire</li>
+<li><code>long distanza</code>: è il nuovo offset.</li>
+<li><code>int partenza</code> o <code>whence</code> indica da dove <code>distanza</code> viene calcolata. Può assumere
+<ul>
+<li><code>SEEK_SET</code>: inizio del file</li>
+<li><code>SEEK_END</code>: fine del file</li>
+<li><code>SEEK_CUR</code>: posizione corrente del cursore</li>
+</ul>
+</li>
+</ul>
+<p>Per sapere in che posizione è il cursore:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">long</span> <span class="hljs-title">ftell</span><span class="hljs-params">(FILE *stream)</span></span>;
+</div></code></pre>
+<h3 id="funzioni-fread-e-fwrite">Funzioni <code>fread</code> e <code>fwrite</code></h3>
+<p>Simili a <code>fgets</code> e <code>fputs</code>, ma per file binari.</p>
+<ul>
+<li>Ignorano il ritorno a capo <code>\n</code>.</li>
+<li>Leggono/scrivono una quantità fissa di byte</li>
+<li>Ottime per file binari: contengono caratteri non stampabili, e anche tanti <code>'\0'</code> (terminatori).
+<ul>
+<li>Impossibile leggere correttamente i terminatori.</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">size_t</span> <span class="hljs-title">fread</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *<span class="hljs-keyword">restrict</span> ptr, <span class="hljs-keyword">size_t</span> <span class="hljs-built_in">size</span>, <span class="hljs-keyword">size_t</span> nmemb,
+                    FILE *<span class="hljs-keyword">restrict</span> stream)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">size_t</span> <span class="hljs-title">fwrite</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *<span class="hljs-keyword">restrict</span> ptr, <span class="hljs-keyword">size_t</span> <span class="hljs-built_in">size</span>, <span class="hljs-keyword">size_t</span> nmemb,
+                    FILE *<span class="hljs-keyword">restrict</span> stream)</span></span>;
+</div></code></pre>
+<p>Permettono di leggere/scrivere file binari (che contengono <code>'\0'</code>).</p>
+<ul>
+<li>Oppure <code>int</code>, <code>float</code>, <code>struct</code> e vettori</li>
+</ul>
+<p><strong>Funzionamento</strong>: leggi/scrivi nella <code>nmemb</code> oggetti, ognuno grande <code>size</code> byte dal puntatore a file <code>stream</code> e scrivili/leggili da <code>ptr</code>.
+<strong>Valore di ritorno</strong>: il numero di elementi effettivamente letti/scritti.</p>
+<h3 id="buffer">Buffer</h3>
+<p>E' possibile settare la dimensione del buffer:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setbuf</span><span class="hljs-params">(FILE *stream, <span class="hljs-keyword">char</span> *buf)</span></span>;
+</div></code></pre>
+<p>Si può forzare una scrittura su file:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fflush</span><span class="hljs-params">(FILE *stream)</span></span>;
+</div></code></pre>
+<h3 id="rimozione">Rimozione</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">remove</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname)</span></span>;
+</div></code></pre>
+<h3 id="system-call-per-file">System Call per file</h3>
+<ul>
+<li><code>open</code></li>
+<li><code>read</code></li>
+<li><code>write</code></li>
+<li><code>lseek</code></li>
+<li><code>close</code></li>
+</ul>
+<h3 id="hard--soft-link-sys-call">Hard / Soft Link (Sys Call)</h3>
+<p><strong>Soft Link:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">symlink</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *target, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *linkpath)</span></span>;
+</div></code></pre>
+<p><strong>Hard Link:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">link</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *oldpath, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *newpath)</span></span>;
+</div></code></pre>
+<h3 id="system-call-per-directory">System call per directory</h3>
+<p><strong>Lettura di informazioni su una directory o un file:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">stat</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *<span class="hljs-keyword">restrict</span> pathname,
+                struct stat * statbuf)</span></span>;
+</div></code></pre>
+<p>Ritorna informazioni su <code>pathname</code>, le colloca nella <code>struct stat</code> puntata da <code>statbuf</code></p>
+<p>Il campo <code>mode_t</code> della <code>struct stat</code> indica se si tratta di file in forma di una <em>bit mask</em>.
+Si possono usare le seguenti macro per testare facilmente <code>mode_t</code></p>
+<ul>
+<li><code>S_ISREG(m)</code>: True se file regolare</li>
+<li><code>S_ISDIR(m)</code>: True se file directory</li>
+<li><code>S_ISLNK(m)</code>: True se file un Symbolic Link</li>
+</ul>
+<h4 id="creazione-di-directory">Creazione di directory</h4>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">mkdir</span> <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *path, <span class="hljs-keyword">mode_t</span> mode)</span></span>;
+</div></code></pre>
+<h3 id="rimozione-di-directory">Rimozione di directory</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">rmdir</span> <span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *path)</span></span>;
+</div></code></pre>
+<h3 id="funzioni-di-libreria-per-directory">Funzioni di libreria per directory</h3>
+<ul>
+<li><code>DIR * opendir(const char *name);</code></li>
+<li><code>struct dirent readdir(DIR *dirp);</code></li>
+<li><code>int closedir(DIR *dirp);</code>
+<code>closedir</code> ritorna 0 se va a buon fine, altrimenti -1.</li>
+</ul>
+<p>Una <code>struct dirent</code> rappresenta un elemento di una directory.</p>
+<ul>
+<li><strong>Listare il contenuto:</strong> si usa la funzione <code>readdir</code> che ritorna <strong>una</strong> <code>struct dirent *</code></li>
+</ul>
+<h2 id="processi">Processi</h2>
+<p><strong>Operazione di Yield</strong>: un processo dice al kernel, che per il momento non ha operazioni da fare.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sched.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sched_yield</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;
+</div></code></pre>
+<h3 id="system-call-processi">System call processi</h3>
+<ul>
+<li><code>fork</code>: crea un processo duplicato
+<ul>
+<li>Valore di ritorno:
+<ul>
+<li>Processo figlio: $0$</li>
+<li>Processo padre: PID del processo figlio</li>
+<li>Errore della fork:  PID negativo (solo padre)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>exec</code>: carica un codice eseguibile</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execl</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *arg, ...)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execlp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *file, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *arg, ...)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execle</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *arg, ..., <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> envp[])</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execv</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname, <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> argv[])</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execvp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *file, <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> argv[])</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execve</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *pathname, <span class="hljs-keyword">char</span> *argv[], <span class="hljs-keyword">char</span>* envp[])</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execvpe</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *file, <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> argv[], <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> envp[])</span></span>;
+</div></code></pre>
+<ul>
+<li>
+<p>Le funzioni con <code>p</code> ricevono il nome dell'eseguibile e non il path.</p>
+</li>
+<li>
+<p>Le funzioni con <code>l</code> specificano gli <strong>argomenti</strong> del nuovo programma tramite una lista di argomenti.</p>
+</li>
+<li>
+<p>Le funzioni con <code>v</code> specificano gli <strong>argomenti</strong> del nuovo programma tramite un unico vettore di puntatori a <code>char</code>.</p>
+</li>
+<li>
+<p><code>wait</code>: aspetta la terminazione di un figlio</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/wait.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">pid_t</span> <span class="hljs-title">waitpid</span><span class="hljs-params">(<span class="hljs-keyword">pid_t</span> pid, <span class="hljs-keyword">int</span> *status, <span class="hljs-keyword">int</span> options)</span></span>;
+</div></code></pre>
+<p>La funzione <code>wait</code> <em>consuma</em> un figlio per volta.
+Dopo che un figlio è stato <em>ritornato</em> al padre tramite una <code>wait</code>:</p>
+<ul>
+<li>
+<p>Il SO rilascia le risorse del processo figlio</p>
+<ul>
+<li>Il SO mantiene informazioni su processi terminati di cui non è ancora stata effettuata una <code>wait</code></li>
+<li>Traccia che il processo è esistito</li>
+<li>Valore di ritorno e informazioni su esecuzione</li>
+</ul>
+</li>
+<li>
+<p>Non verrà ritornato in succesive invocazioni</p>
+</li>
+<li>
+<p><code>kill</code>: invia un segnale</p>
+</li>
+<li>
+<p><code>signal</code>: cattura un segnale</p>
+</li>
+<li>
+<p><code>_exit</code>: termina il processo corrente
+Termina immediatamente senza controllare i buffer.
+<strong>Nota:</strong></p>
+<ul>
+<li>La <code>_exit</code> è una System Call</li>
+<li>La <code>exit</code> è una funzione di libreria. Fa pulizia e poi invoca la <code>_exit</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="funzione-system">Funzione <code>system</code></h3>
+<p>E' una funzione di libreria che invoca un comando Bash e ne attende la conclusione.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">system</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *command)</span></span>;
+</div></code></pre>
+<p>Equivale a una <code>fork</code> il cui figlio esegue:</p>
+<pre class="hljs"><code><div>execl(<span class="hljs-string">"/bin/sh"</span>, <span class="hljs-string">"sh"</span>, <span class="hljs-string">"-c"</span>, command, (<span class="hljs-keyword">char</span> *) <span class="hljs-literal">NULL</span>);
+</div></code></pre>
+<h2 id="segnali">Segnali</h2>
+<h3 id="system-call">System call</h3>
+<p>-<code>sigaction</code></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sigaction</span><span class="hljs-params">(<span class="hljs-keyword">int</span> signum, <span class="hljs-keyword">const</span> struct sigaction *act,
+              struct sigaction *oldact)</span></span>;
+</div></code></pre>
+<p>Modifica il comportamento del processo corrente a un segnale particolare
+<strong>Argomenti</strong>:</p>
+<ul>
+<li><code>signum</code>: segnale da trattare</li>
+<li><code>act</code>: puntatore a struttura che definisce trattamento</li>
+<li><code>oldact</code>: puntatore a comportamento precedente. Può servire per ristabilire il comportamento precedente.</li>
+</ul>
+<p><strong>Ritorna</strong> -1 se c’è stato errore</p>
+<p>-<code>kill</code></p>
+<p>Manda un segnale ad un processo oppure a un gruppo di processi</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">kill</span><span class="hljs-params">(<span class="hljs-keyword">pid_t</span> pid, <span class="hljs-keyword">int</span> sig)</span></span>;
+</div></code></pre>
+<p>-<code>raise</code></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">raise</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> sig)</span></span>;
+</div></code></pre>
+<p>Permette a un processo di inviare un segnale a se stesso.</p>
+<p>-<code>pause</code></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pause</span> <span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;
+</div></code></pre>
+<p>Sospende il processo fino all’arrivo di un segnale
+Serve a implementare l’attesa passiva di un segnale
+Ritorna dopo che il segnale è stato catturato ed il gestore è stato eseguito, restituisce sempre (-1)</p>
+<p>-<code>alarm</code></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">alarm</span> <span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> seconds)</span></span>;
+</div></code></pre>
+<h2 id="inter-process-communication">Inter-process communication</h2>
+<h3 id="pipe">Pipe</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pipe</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> filedes [<span class="hljs-number">2</span>])</span></span>;
+</div></code></pre>
+<p>E' una SYSTEM CALL.</p>
+<p>Ritorna due descrittori di file  attraverso l'argomento fd (passato per riferimento)</p>
+<ul>
+<li><code>fd[0]</code> è aperto in lettura</li>
+<li><code>fd[1]</code> è aperto in scrittura</li>
+<li>L'output di <code>fd[0]</code> è l'input di <code>fd[1]</code></li>
+</ul>
+<h3 id="memoria-condivisa-con-shmget-tutte-system-call">Memoria condivisa con <code>shmget</code> (tutte system call)</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/shm.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">shmget</span><span class="hljs-params">(<span class="hljs-keyword">key_t</span> key, <span class="hljs-keyword">size_t</span> <span class="hljs-built_in">size</span>, <span class="hljs-keyword">int</span> shmflg)</span></span>;
+</div></code></pre>
+<p>Crea un segmento di memoria condivisa.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/shm.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">shmat</span><span class="hljs-params">(<span class="hljs-keyword">int</span> shmid, <span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *shmaddr, <span class="hljs-keyword">int</span> shmflg)</span></span>;
+</div></code></pre>
+<p>Mappa il segmento di memoria virtuale nello spazio degli indirizzi del processo.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/shm.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">shmdt</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *shmaddr)</span></span>;
+</div></code></pre>
+<p>Rimuove in mapping del segmento all'indirizzo virtuale <code>shmaddr</code></p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/ipc.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">key_t</span> <span class="hljs-title">ftok</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname, <span class="hljs-keyword">int</span> proj_id)</span></span>;
+</div></code></pre>
+<p>Crea una <code>key</code> a partire da un path.</p>
+<h3 id="memoria-condivisa-con-mmap">Memoria condivisa con <code>mmap</code></h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/mman.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">mmap</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *addr, <span class="hljs-keyword">size_t</span> length, <span class="hljs-keyword">int</span> prot, <span class="hljs-keyword">int</span> flags,
+          <span class="hljs-keyword">int</span> fd, <span class="hljs-keyword">off_t</span> offset)</span></span>;
+</div></code></pre>
+<p>Crea una zona di memoria condivisa.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">munmap</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *addr, <span class="hljs-keyword">size_t</span> length)</span></span>;
+</div></code></pre>
+<p>Rimuove la mappatura e rende disponibile la memoria all'indirizzo <code>addr</code>.</p>
+<h3 id="ridimensionamento-file">Ridimensionamento file</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">truncate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *path, <span class="hljs-keyword">off_t</span> length)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ftruncate</span><span class="hljs-params">(<span class="hljs-keyword">int</span> fd, <span class="hljs-keyword">off_t</span> length)</span></span>;
+</div></code></pre>
+<p>Assicura che il file aperto <code>fd</code> o il file <code>path</code> si lungo almeno <code>length</code>.</p>
+<ul>
+<li>Se necessario il file è troncato</li>
+<li>Se necessario esteso e riempito con caratteri <code>'\0'</code> (o <code>0X00</code> in hex).</li>
+</ul>
+<h3 id="zona-di-memoria-mappata-su-file-temporaneo">Zona di memoria mappata su file temporaneo</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/mman.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">shm_open</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *name, <span class="hljs-keyword">int</span> oflag, <span class="hljs-keyword">mode_t</span> mode)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">shm_unlink</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *name)</span></span>;
+</div></code></pre>
+<h2 id="memoria-dinamica">Memoria dinamica</h2>
+<ul>
+<li><code>malloc</code></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">malloc</span><span class="hljs-params">(<span class="hljs-keyword">size_t</span> <span class="hljs-built_in">size</span>)</span></span>;
+</div></code></pre>
+<p>Alloca <code>size</code> byte di memoria e ritorna il puntatore alla memoria allocata.</p>
+<ul>
+<li><code>calloc</code></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">calloc</span><span class="hljs-params">(<span class="hljs-keyword">size_t</span> nmemb, <span class="hljs-keyword">size_t</span> <span class="hljs-built_in">size</span>)</span></span>;
+</div></code></pre>
+<p>Simile alla <code>malloc</code>
+Alloca memoria pe run array di <code>nmemb</code> elementi ognuno di <code>size</code> byte e ne ritorna il puntatore.</p>
+<ul>
+<li><code>realloc</code></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">realloc</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *ptr, <span class="hljs-keyword">size_t</span> <span class="hljs-built_in">size</span>)</span></span>;
+</div></code></pre>
+<p>Modifica la dimensione della zona di memoria puntata da <code>ptr</code> a <code>size</code> byte.
+Il valore di ritorno è il puntatore alla zone estesa</p>
+<ul>
+<li>
+<p>Se comporta un restringimento della zona di memoria, i dati in eccesso sono persi</p>
+</li>
+<li>
+<p>Se comporta un aumento, la zona aggiuntiva <strong>NON</strong> è inizializzata</p>
+</li>
+<li>
+<p><code>free</code></p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">free</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *ptr)</span></span>;
+</div></code></pre>
+<p>Dealloca (o liberia) la zona di memoria indicata da <code>ptr</code>.
+<code>ptr</code> deve essere stato ottenuto con <code>malloc</code> <code>calloc</code> o <code>realloc</code></p>
+<p>Se si tenta di liberare più volta una zona di memoria, il comportamento non è definito.</p>
+<h2 id="thread">Thread</h2>
+<h3 id="creazione-di-un-thread-tutte-funzioni-di-libreria">Creazione di un thread (TUTTE FUNZIONI DI LIBRERIA)</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;pthread.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pthread_create</span><span class="hljs-params">(<span class="hljs-keyword">pthread_t</span> *thread, <span class="hljs-keyword">const</span> <span class="hljs-keyword">pthread_attr_t</span> *attr,
+                   <span class="hljs-keyword">void</span> *(*start)(<span class="hljs-keyword">void</span> *), <span class="hljs-keyword">void</span> *arg)</span></span>;
+</div></code></pre>
+<pre class="hljs"><code><div>include &lt;pthread.h&gt;
+<span class="hljs-function"><span class="hljs-keyword">pthread_t</span> <span class="hljs-title">pthread_self</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;
+</div></code></pre>
+<p>Permette a un thread di ottenere il proprio Thread ID.</p>
+<pre class="hljs"><code><div>include &lt;pthread.h&gt;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pthread_join</span><span class="hljs-params">(<span class="hljs-keyword">pthread_t</span> thread, <span class="hljs-keyword">void</span> **retval)</span></span>;
+</div></code></pre>
+<p>Attende che il thread <code>thread</code> termini.
+Immagazzinail valore di ritorno all'indirizzo <code>retval</code></p>
+<h3 id="mutex">Mutex</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;pthread.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pthread_mutex_init</span><span class="hljs-params">(<span class="hljs-keyword">pthread_mutex_t</span> * mutex , <span class="hljs-keyword">const</span> <span class="hljs-keyword">pthread_mutexattr_t</span> * attr )</span></span>;
+</div></code></pre>
+<p>Inizializza il mutex <code>mutex</code>, che viene passato per riferimento (tipo <code>pthread_mutex_t *</code> )</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;pthread.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pthread_mutex_lock</span><span class="hljs-params">(<span class="hljs-keyword">pthread_mutex_t</span> * mutex )</span></span>;
+</div></code></pre>
+<p>Acquisisce il <em>lock</em> del mutex</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;pthread.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pthread_mutex_unlock</span><span class="hljs-params">(<span class="hljs-keyword">pthread_mutex_t</span> * mutex )</span></span>;
+</div></code></pre>
+<p>Rilascia il lock</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;pthread.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pthread_mutex_trylock</span> <span class="hljs-params">( <span class="hljs-keyword">pthread_mutex_t</span> *mutex)</span></span>;
+</div></code></pre>
+<p>Acquisisce il lock</p>
+<ul>
+<li>Se il lock è già preso da qualcun'altro fallisce con errore (valore di ritorno) <code>EBUSY</code></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;pthread.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pthread_mutex_destroy</span> <span class="hljs-params">( <span class="hljs-keyword">pthread_mutex_t</span> *mutex )</span></span>;
+</div></code></pre>
+<p>Rilascia la memoria occupata dal lock mutex
+Tale lock non sarà più utilizzabile</p>
+<h3 id="semafori-named">Semafori (Named)</h3>
+<ul>
+<li>Creazione di un named semaphore: <code>sem_open()</code></li>
+<li>Operazioni: <code>sem_post(sem)</code>, <code>sem_wait(sem)</code> e <code>sem_getvalue()</code></li>
+<li>Chiusura e distruzione: <code>sem_close()</code> e <code>sem_unlink()</code></li>
+</ul>
+<p>Necessario includere l'header:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;semaphore.h&gt;</span></span>
+</div></code></pre>
+<h3 id="altre-operazioni">Altre operazioni</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;semaphore.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sem_trywait</span><span class="hljs-params">(<span class="hljs-keyword">sem_t</span> *sem)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sem_getvalue</span><span class="hljs-params">(<span class="hljs-keyword">sem_t</span> *<span class="hljs-keyword">restrict</span> sem, <span class="hljs-keyword">int</span> *<span class="hljs-keyword">restrict</span> sval)</span></span>;
+</div></code></pre>
+<p><code>sem_trywait</code> come la <code>sem_wait</code></p>
+<ul>
+<li>Ma non blocca in caso il semaforo vada in negativo</li>
+<li>Ma fallisce</li>
+</ul>
+<p><code>sem_getvalue</code> colloca nell'intero puntato da <code>sval</code> il valore del semaforo</p>
+<h2 id="semafori-unnamed">Semafori (unnamed)</h2>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;semaphore.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sem_init</span><span class="hljs-params">(<span class="hljs-keyword">sem_t</span> * sem , <span class="hljs-keyword">int</span> pshared , <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> value )</span></span>;
+</div></code></pre>
+<p>Se <code>pshared</code> è $0$, il semaforo non viene condiviso tra processi, ma solo tra thread</p>
+<ul>
+<li><code>sem</code> può essere una comune variabile globale</li>
+</ul>
+<p>Se <code>pshared</code> è $\neq 0$, il semaforo viene condiviso tra processi (tramite <code>fork</code>)</p>
+<ul>
+<li><code>sem</code> deve essere in una zona di memoria condivisa</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;semaphore.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sem_destroy</span><span class="hljs-params">(<span class="hljs-keyword">sem_t</span> * sem )</span></span>;
+</div></code></pre>
+<p>Distrugge il semaforo <code>sem</code>.</p>
+<p>Nota: <code>sem_close</code> e <code>sem_unlink</code> sono usato solo coi <em>Named Semaphores</em></p>
+<h2 id="docker">Docker</h2>
+<ul>
+<li><code>docker pull &lt;immagine&gt;</code>: scarica un <code>immagine</code> da Docker Hub</li>
+<li><code>docker ps</code>: mostra i container in esecuzione</li>
+<li><code>docker run --name &lt;nome&gt; &lt;immagine&gt;</code>: esegue un container da <code>immagine</code> e gli assegna il <code>&lt;nome&gt;</code></li>
+<li><code>docker stop &lt;nome&gt;</code>: termina il container identificato da <code>nome</code></li>
+</ul>
+<h2 id="socket">Socket</h2>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/socket.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">socket</span><span class="hljs-params">(<span class="hljs-keyword">int</span> domain, <span class="hljs-keyword">int</span> type, <span class="hljs-keyword">int</span> protocol)</span></span>;
+</div></code></pre>
+<p>Crea un socket. Gli argomenti <code>domain</code> e <code>protocol</code> ne specificano la natura.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/socket.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">connect</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sockfd, <span class="hljs-keyword">const</span> struct sockaddr * addr, <span class="hljs-keyword">socklen_t</span> addrlen )</span></span>;
+</div></code></pre>
+<p>Rende il socket <code>sockfd</code> attivo e si connette a indirizzo IP e porta specificati in <code>addr</code> e <code>addrlen</code>
+Ritorna $0$ in caso di successo, se no $-1$</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/socket.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bind</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sockfd , <span class="hljs-keyword">const</span> struct sockaddr * addr , <span class="hljs-keyword">socklen_t</span> addrlen )</span></span>;
+</div></code></pre>
+<p>Rende il socket <code>sockfd</code> passivo, ovvero lo mette in ascolto sulla porta specificata in <code>addr</code> e <code>addrlen</code>
+Ritorna $0$ in caso di successo, se no $-1$</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/socket.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">listen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sockfd , <span class="hljs-keyword">int</span> backlog)</span></span>;
+</div></code></pre>
+<p>Dopo che un socket <code>sockfd</code> è stato specificato come passivo (con <code>bind</code>), la <code>listen</code> lo mette effettivamente in ascolto sulla porta specificata.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/socket.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">accept</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sockfd , struct sockaddr * addr , <span class="hljs-keyword">socklen_t</span> * addrlen)</span></span>;
+</div></code></pre>
+<p>Attende che una connessione arrivi al socket passivo <code>sockfd</code>.</p>
+
+</body>
+</html>
