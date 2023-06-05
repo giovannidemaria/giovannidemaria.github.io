@@ -384,8 +384,10 @@ code {
 <li><code>fputs(stringa, file)</code>: scrive una stringa su file</li>
 </ul>
 <h3 id="scrittura-e-lettura-di-pi%C3%B9-caratterinumeri-interi-e-reali">Scrittura e lettura di più caratteri/numeri interi e reali</h3>
-<p><code>fprintf(file, formato, argomenti)</code>
-<code>fscanf(fp, &quot;%s&quot;, buffer)</code></p>
+<ul>
+<li><code>fprintf(file, formato, argomenti)</code></li>
+<li><code>fscanf(fp, &quot;%s&quot;, buffer)</code></li>
+</ul>
 <h3 id="stampa-di-errori">Stampa di errori</h3>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">perror</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *s)</span></span>;
@@ -581,7 +583,9 @@ Termina immediatamente senza controllare i buffer.
 </div></code></pre>
 <h2 id="segnali">Segnali</h2>
 <h3 id="system-call">System call</h3>
-<p>-<code>sigaction</code></p>
+<ul>
+<li><code>sigaction</code></li>
+</ul>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sigaction</span><span class="hljs-params">(<span class="hljs-keyword">int</span> signum, <span class="hljs-keyword">const</span> struct sigaction *act,
               struct sigaction *oldact)</span></span>;
@@ -594,25 +598,33 @@ Termina immediatamente senza controllare i buffer.
 <li><code>oldact</code>: puntatore a comportamento precedente. Può servire per ristabilire il comportamento precedente.</li>
 </ul>
 <p><strong>Ritorna</strong> -1 se c’è stato errore</p>
-<p>-<code>kill</code></p>
+<ul>
+<li><code>kill</code></li>
+</ul>
 <p>Manda un segnale ad un processo oppure a un gruppo di processi</p>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">kill</span><span class="hljs-params">(<span class="hljs-keyword">pid_t</span> pid, <span class="hljs-keyword">int</span> sig)</span></span>;
 </div></code></pre>
-<p>-<code>raise</code></p>
+<ul>
+<li><code>raise</code></li>
+</ul>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">raise</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> sig)</span></span>;
 </div></code></pre>
 <p>Permette a un processo di inviare un segnale a se stesso.</p>
-<p>-<code>pause</code></p>
+<ul>
+<li><code>pause</code></li>
+</ul>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pause</span> <span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;
 </div></code></pre>
 <p>Sospende il processo fino all’arrivo di un segnale
 Serve a implementare l’attesa passiva di un segnale
 Ritorna dopo che il segnale è stato catturato ed il gestore è stato eseguito, restituisce sempre (-1)</p>
-<p>-<code>alarm</code></p>
+<ul>
+<li><code>alarm</code></li>
+</ul>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">alarm</span> <span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> seconds)</span></span>;
 </div></code></pre>
