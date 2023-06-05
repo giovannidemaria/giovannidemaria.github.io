@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>funzioni.md</title>
+<title>sysOpFunc.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -540,6 +540,15 @@ Si possono usare le seguenti macro per testare facilmente <code>mode_t</code></p
 </li>
 </ul>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/wait.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">pid_t</span> <span class="hljs-title">wait</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> *status)</span></span>;
+</div></code></pre>
+<p>Attende la prima terminazione di <strong>un</strong> figlio
+Argomento <code>status</code>:</p>
+<ul>
+<li>Puntatore ad un intero;</li>
+<li>Se non è NULL specifica lo stato di uscita del processo figlio (valore restituito dal figlio)</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/wait.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">pid_t</span> <span class="hljs-title">waitpid</span><span class="hljs-params">(<span class="hljs-keyword">pid_t</span> pid, <span class="hljs-keyword">int</span> *status, <span class="hljs-keyword">int</span> options)</span></span>;
 </div></code></pre>
 <p>La funzione <code>wait</code> <em>consuma</em> un figlio per volta.
@@ -628,6 +637,7 @@ Ritorna dopo che il segnale è stato catturato ed il gestore è stato eseguito, 
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
 <span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">alarm</span> <span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> seconds)</span></span>;
 </div></code></pre>
+<p>Implementa un timeout. Il SO manda un segnale <code>SIGALRM</code> al processo dopo <code>seconds</code> secondi</p>
 <h2 id="inter-process-communication">Inter-process communication</h2>
 <h3 id="pipe">Pipe</h3>
 <pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
